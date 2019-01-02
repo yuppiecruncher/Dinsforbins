@@ -1,5 +1,0 @@
-Create project repository steps
-
-Setup Environmen
-
-Create a starter project with Pyramid
