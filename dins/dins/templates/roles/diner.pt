@@ -1,0 +1,17 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content">
+
+        <div class="content">
+            <h1>Welcome to The Diner Page</h1>
+            <div>
+              To Do: display meal options
+              <div class ="meals" tal:repeat='m meals'>
+                <span class="title">${m.name}, </span>
+                <span class="date" tal:condition="m.date">${m.date}</span>
+                <span class="date" tal:condition="not m.date">No Date Set</span>
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>
