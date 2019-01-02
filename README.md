@@ -8,11 +8,11 @@ This web application will allow a user (diner) to reserve menu options and times
 The webapp is built upon the following stack:
 
 Pyramid Framework
-  -utilizing Chameleon template
-Twitter Bootstrap
-SQLAlchemy (and Alembic)
-Postgresql
-Twilio
+<p>  -utilizing Chameleon template
+<p>Twitter Bootstrap
+<p>SQLAlchemy (and Alembic)
+<p>Postgresql
+<p>Twilio
 
 Planned functionality:
 -Account management and role assignment (diner, chef, analyst)
