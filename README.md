@@ -1,5 +1,5 @@
 # Dinsforbins
-Simple Dinner Reservation Web Application
+Simple Dinner Reservation Web Application Based on Python3
 
 The goal of this project is to deploy a live web application with some key features.
 
@@ -16,7 +16,7 @@ Twilio
 
 Planned functionality:
 -Account management and role assignment (diner, chef, analyst)
--Basic error correction
+-Basic HTML error correction
 -Cookie sessions
 -Email confirmation, notifications and surveys
 
