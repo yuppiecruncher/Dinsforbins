@@ -1,12 +1,19 @@
 <div metal:use-macro="load: ../shared/_layout.pt">
     <div metal:fill-slot="content">
-
         <div class="content">
-            <h1>Welcome to Dins For Bins</h1>
-            <div>
-              To Do: Build the Home page
-            </div>
-        </div>
+          <div class="hero">
+            <h1>
+              Family Dinner Planning Made Easier
+            </h1>
+            <br>
+            <br>
+            <br>
+              <a href="#">Register</a> or <a href="#">Learn more</a>
+          </div>
 
+          <div class="lower-tagline">
+            <div class="tagline">Organize meals for the week quickly and efficiently.</div>
+          </div>
+        </div>
     </div>
 </div>
