@@ -1,6 +1,6 @@
 body {
   font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-  background-color: #a34110;
+  background-color: #2a292a;
 }
 
 .hero {
@@ -40,4 +40,29 @@ body {
   text-align: center;
   line-height: 1.0em;
   font-size: 25px;
+}
+
+.btn-secondary {
+  color: #2a292a;
+  background-color: a34110;
+  max-width: 150px;
+}
+
+.btn {
+  width: 200px;
+}
+
+.container-fluid {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.taglinetext {
+  background-color: rgba(#000000, 0.9);
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

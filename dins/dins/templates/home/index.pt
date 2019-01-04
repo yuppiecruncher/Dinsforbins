@@ -1,19 +1,23 @@
 <div metal:use-macro="load: ../shared/_layout.pt">
     <div metal:fill-slot="content">
         <div class="content">
-          <div class="hero">
-            <h1>
-              Family Dinner Planning Made Easier
-            </h1>
-            <br>
-            <br>
-            <br>
-              <a href="#">Register</a> or <a href="#">Learn more</a>
-          </div>
 
-          <div class="lower-tagline">
-            <div class="tagline">Organize meals for the week quickly and efficiently.</div>
-          </div>
+            <div class="hero">
+              <h1>
+                Family Dinner Planning Made Easier
+              </h1>
+              <br>
+                <button href="#" class="btn btn-lg btn-secondary">Login</button>
+              <br>
+              <br>
+                <a href="#">Register</a> or <a href="#">Learn more</a>
+            </div>
+            <img src="../static/img/reducedsplash.jpg" alt="Join us for dinner" style="width:100%;">
+
+            <div class="container-fluid">
+                <div class="taglinetext">Organize meals for the week quickly and efficiently.</div>
+            </div>
+
         </div>
     </div>
 </div>
