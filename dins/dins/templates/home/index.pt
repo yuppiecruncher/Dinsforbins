@@ -12,12 +12,7 @@
               <br>
                 <a href="#">Register</a> or <a href="#">Learn more</a>
             </div>
-            <img src="../static/img/reducedsplash.jpg" alt="Join us for dinner" style="width:100%;">
-
-            <div class="container-fluid">
-                <div class="taglinetext">Organize meals for the week quickly and efficiently.</div>
-            </div>
-
+            <!-- <img src="../static/img/reducedsplash.jpg" alt="Join us for dinner" style="width:100%;"> -->
         </div>
     </div>
 </div>
