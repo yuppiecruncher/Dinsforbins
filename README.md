@@ -26,6 +26,8 @@ Planned functionality:
 
 To run this website on your local machine, you will need virtualenv(https://virtualenv.pypa.io/en/latest/). clone the repository to your machine. Using your command-line interface navigate to the folder 'dins' containing the development.ini file. Activate the virtual environment (on linux/mac it should be 'source venv/bin/activate') and run pserve development.ini . You can now open any browser and type 'localhost' to view the site.
 
+The first time this stack is run, install the dependencies by running "$ setup.py develop" in the virtual environment
+
 You may wish to update pip and setuptools, depending on how out of date the versions included in the repository are. On mac/linux command line this is pip install -U pip setuptools.
 
 Personal note: this app is being created for my partner. Its namesake comes from their nickname - Bins. Hence "Dinner for Partner" or "Dinsforbins")

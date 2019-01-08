@@ -6,10 +6,8 @@
             <div>
               To Do: display meal options
               <!--note these meals are placeholders for data-driven elements  -->
-              <div class ="meals" tal:repeat='m meals'>
-                <span class="title">${m.name}, </span>
-                <span class="date" tal:condition="m.date">${m.date}</span>
-                <span class="date" tal:condition="not m.date">No Date Set</span>
+              <div class ="meals">
+                <span class="title">${meal_title}</span>
               </div>
             </div>
         </div>
