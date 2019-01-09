@@ -14,11 +14,27 @@ def login_post(request):
 ################ REGISTRATION ################
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='GET')
-def register_get(request):
+def register_get(_):
     return {}
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='POST')
 def register_post(request):
+    print("-------------------------------------------------------")
+    print("request.POST: ", request.POST)
+    print("request.GET: ", request.GET)
+    print("request.matchdict: ", request.matchdict)
+    print("-------------------------------------------------------")
+
+    return {}
+
+################ LOGIN ################
+
+@view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='GET')
+def login_get(request):
+    return {}
+
+@view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='POST')
+def login_post(request):
     return {}
 
 ################ LOGOUT ################

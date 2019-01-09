@@ -2,11 +2,20 @@
     <div metal:fill-slot="content">
 
         <div class="content">
-            <h1>Registration Page</h1>
             <div>
-              To Do: Login form
+              <form action="" method="POST" class="account-form">
+                <h1>Register</h1>
+                <input name="name" type="text" placeholder=" Your name" class="form-control">
+                <input name="email" type="text" placeholder=" Your email address" class="form-control">
+                <input name="password" type="text" placeholder=" Your password" class="form-control">
+                <button type="submit" class="btn btn-lg btn-secondary"> Register</button>
+              </form>
             </div>
         </div>
+
+    </div>
+    <div metal:fill-slot="additional-css">
+      <link href="${request.static_url('dins:static/css/account.css')}" rel="stylesheet">
 
     </div>
 </div>
