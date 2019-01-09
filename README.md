@@ -6,7 +6,7 @@ Simple Dinner Reservation Web Application Based on Python3
 
 The goal of this project is to deploy a live web application with some key features.
 
-This web application will allow a user (diner) to reserve menu options and times from a list populated by a content producer (the chef). A third user type (the analyst) will be able to see usage statistics, survey responses and other relevant data through a built-in dashboard.
+This web application will allow a user (diner) to reserve menu options and times from a list populated by a content producer- (the chef). A third user type (the analyst) will be able to see usage statistics, survey responses and other relevant data through a built-in dashboard.
 
 The webapp is built upon the following stack:
 
@@ -20,9 +20,11 @@ Pyramid Framework (https://trypyramid.com/)
 
 Planned functionality:
 -Account management and role assignment (diner, chef, analyst)
--Basic HTML error correction
+-Data-driven interactions between diner and chef and interactive SQLAlchemy-based queries for the Analyst.
+-Basic HTML form-based error correction of input data (with proper escaping and security protocols to prevent attacks.)
 -Cookie sessions
--Email confirmation, notifications and surveys
+-Email based confirmation, notifications and surveys
+-DB migration and modification with Alembic to allow for migration to postgresql or noSQL based DB such as MongoDb.
 
 To run this website on your local machine, you will need virtualenv(https://virtualenv.pypa.io/en/latest/). clone the repository to your machine. Using your command-line interface navigate to the folder 'dins' containing the development.ini file. Activate the virtual environment (on linux/mac it should be 'source venv/bin/activate') and run pserve development.ini . You can now open any browser and type 'localhost' to view the site.
 
