@@ -31,4 +31,16 @@ def logout(request):
 
 @view_config(route_name='diner', renderer='dins:templates/roles/diner.pt')
 def diner_page(request):
-    return meals_services.meal_title()
+    return {
+        'titles': get_meals()
+    }
+
+def get_meals():
+    titles = meals_services.meal_title()
+    desc = meals_services.meal_desc()
+    date = meals_services.meal_date()
+    return [
+        {'name': titles[0], 'description': desc[0], 'date': date[0].strftime("%A, %B, %d"),},
+        {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
+        {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
+    ]

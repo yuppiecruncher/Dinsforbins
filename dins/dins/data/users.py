@@ -15,8 +15,3 @@ class User(SqlAlchemyBase):
 
     created_date = sa.Column(sa.DateTime, default=datetime.datetime.now)
     last_login = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
-
-
-    # reference for debugging in editor
-    def __repr__(self):
-        return '<Package {}>'.format(self.id)
