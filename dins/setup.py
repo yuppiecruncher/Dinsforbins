@@ -16,6 +16,7 @@ requires = [
     'waitress',
     'sqlalchemy',
     'alembic',
+    'passlib'
 ]
 
 tests_require = [

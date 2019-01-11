@@ -3,9 +3,7 @@
         <div class="content">
 
             <div class="hero">
-              <h1>
-                Family Dinner Planning Made Easier
-              </h1>
+              <h1>Family Dinner Planning Made Easier</h1>
               <br>
                 <button href="/account/login" class="btn btn-lg btn-secondary">Login</button>
               <br>

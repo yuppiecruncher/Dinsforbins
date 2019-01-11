@@ -4,9 +4,9 @@ from dins.data.modelbase import SqlAlchemyBase
 
 
 class User(SqlAlchemyBase):
-    __tablename__ = 'users '
+    __tablename__ = 'users'
 
-    id = sa.Column(sa.BigInteger, primary_key=True, autoincrement=True)
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     name = sa.Column(sa.String, nullable=True)
     email = sa.Column(sa.String, index=True, unique=True)
     hashed_password = sa.Column(sa.String, index=True)

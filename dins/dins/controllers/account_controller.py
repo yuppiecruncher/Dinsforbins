@@ -1,5 +1,6 @@
 import pyramid.httpexceptions as x
 from pyramid.view import view_config
+from dins.data_services import user_services
 from dins.data_services import meals_services
 
 ################ LOGIN ################
@@ -20,6 +21,7 @@ def register_get(_):
         'email': None,
         'name': None,
         'password': None,
+        'role': None,
         'error' : None
     }
 
@@ -34,15 +36,18 @@ def register_post(request):
     email = request.POST.get('email')
     name = request.POST.get('name')
     password = request.POST.get('password')
+    role = request.POST.get('role')
 
-    if not email or not name or not password:
+    if not email or not name or not password or not role:
         return {
             'email': email,
             'name': name,
             'password': password,
+            'role': role,
             'error': 'Some required fields are missing.'
         }
     # create user
+    user = user_services.create_user(email, name, password, role)
 
 
     return x.HTTPFound('/diner')
@@ -71,6 +76,8 @@ def diner_page(request):
         'titles': get_meals()
     }
 
+#note for future: if table meals_services has no data, page will crash.
+#Need some placeholder to display until chef puts data in
 def get_meals():
     titles = meals_services.meal_title()
     desc = meals_services.meal_desc()

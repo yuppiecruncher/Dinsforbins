@@ -16,7 +16,9 @@ Pyramid Framework (https://trypyramid.com/)
 <p>Twitter Bootstrap (https://getbootstrap.com/2.0.4/)
 <p>SQLAlchemy (and Alembic) (https://www.sqlalchemy.org/)
 <p>Postgresql (https://www.postgresql.org/)
+<p>Passlib (https://bitbucket.org/ecollins/passlib/wiki/Home)
 <p>Twilio (https://www.twilio.com/)
+
 
 Planned functionality:
 -Account management and role assignment (diner, chef, analyst)
