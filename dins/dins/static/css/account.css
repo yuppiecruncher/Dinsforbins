@@ -29,3 +29,7 @@ form.account-form input.form-control {
 form.account-form button {
   margin-left: 200px;
 }
+
+div.dropdown-item {
+  display: inline-inline-block;
+}

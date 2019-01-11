@@ -1,3 +1,4 @@
+import pyramid.httpexceptions as x
 from pyramid.view import view_config
 from dins.data_services import meals_services
 
@@ -15,7 +16,12 @@ def login_post(request):
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='GET')
 def register_get(_):
-    return {}
+    return {
+        'email': None,
+        'name': None,
+        'password': None,
+        'error' : None
+    }
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='POST')
 def register_post(request):
@@ -25,7 +31,21 @@ def register_post(request):
     print("request.matchdict: ", request.matchdict)
     print("-------------------------------------------------------")
 
-    return {}
+    email = request.POST.get('email')
+    name = request.POST.get('name')
+    password = request.POST.get('password')
+
+    if not email or not name or not password:
+        return {
+            'email': email,
+            'name': name,
+            'password': password,
+            'error': 'Some required fields are missing.'
+        }
+    # create user
+
+
+    return x.HTTPFound('/diner')
 
 ################ LOGIN ################
 

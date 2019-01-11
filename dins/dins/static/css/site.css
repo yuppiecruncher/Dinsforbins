@@ -1,3 +1,7 @@
 body {
   color: #ffff;
 }
+
+.error-msg {
+  color: #f95252;
+}
