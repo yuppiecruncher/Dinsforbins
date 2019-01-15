@@ -27,11 +27,6 @@ def register_get(_):
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='POST')
 def register_post(request):
-    print("-------------------------------------------------------")
-    print("request.POST: ", request.POST)
-    print("request.GET: ", request.GET)
-    print("request.matchdict: ", request.matchdict)
-    print("-------------------------------------------------------")
 
     email = request.POST.get('email')
     name = request.POST.get('name')
@@ -48,19 +43,43 @@ def register_post(request):
         }
     # create user
     user = user_services.create_user(email, name, password, role)
-
-
-    return x.HTTPFound('/diner')
+    
+    if 'Chef' in user.role:
+        return x.HTTPFound('/chef')
+    elif 'Analyst' in user.role:
+        return x.HTTPFound('/analyst')
+    elif 'Diner' in user.role:
+        return x.HTTPFound('/diner')
 
 ################ LOGIN ################
 
 @view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='GET')
-def login_get(request):
-    return {}
+def login_get(_):
+    return {
+        'email': None,
+        'password': None,
+        'error' : None
+    }
 
 @view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='POST')
 def login_post(request):
-    return {}
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    user = user_services.login_user(email, password)
+
+    if not user:
+        return {
+            'email': email,
+            'password': password,
+            'error': 'The user could not be found or the password is incorrect.'
+        }
+    # create cookie session
+    if 'Chef' in user.role:
+        return x.HTTPFound('/chef')
+    elif 'Analyst' in user.role:
+        return x.HTTPFound('/analyst')
+    elif 'Diner' in user.role:
+        return x.HTTPFound('/diner')
 
 ################ LOGOUT ################
 

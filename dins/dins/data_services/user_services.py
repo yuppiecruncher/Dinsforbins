@@ -1,13 +1,14 @@
 from dins import DbSession
 from dins.data.users import User
 from passlib.handlers.sha2_crypt import sha512_crypt
+from typing import Optional
 
 
 
 def create_user(email: str, name: str, password: str, role: str) -> User:
     user = User()
     user.name = name
-    user.email = email
+    user.email = email.lower().strip()
     user.role = role
     user.hashed_password = hash_text(password)
 
@@ -23,3 +24,20 @@ def hash_text(text: str) -> str:
 
 def verify_hash(hashed_text: str, plain_text: str) -> bool:
     return sha512_crypt.verify(plain_text, hashed_text)
+
+def login_user(email: str, password: str) -> Optional[User]:
+    if not email:
+        return None
+
+    email = email.lower().strip()
+
+    session = DbSession.factory()
+    user = session.query(User).filter(User.email == email).one()
+
+    if not user:
+        return None
+
+    if not verify_hash(user.hashed_password, password):
+        return None
+
+    return user
