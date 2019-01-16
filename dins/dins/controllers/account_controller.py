@@ -2,16 +2,7 @@ import pyramid.httpexceptions as x
 from pyramid.view import view_config
 from dins.data_services import user_services
 from dins.data_services import meals_services
-
-################ LOGIN ################
-
-@view_config(route_name='account_home', renderer='dins:templates/account/login.pt', request_method='GET')
-def login_get(request):
-    return {}
-
-@view_config(route_name='account_home', renderer='dins:templates/account/login.pt', request_method='POST')
-def login_post(request):
-    return {}
+from dins.infrastructure import cookie_auth
 
 ################ REGISTRATION ################
 
@@ -43,7 +34,8 @@ def register_post(request):
         }
     # create user
     user = user_services.create_user(email, name, password, role)
-    
+    cookie_auth.set_auth(request, user.id)
+
     if 'Chef' in user.role:
         return x.HTTPFound('/chef')
     elif 'Analyst' in user.role:
@@ -74,6 +66,8 @@ def login_post(request):
             'error': 'The user could not be found or the password is incorrect.'
         }
     # create cookie session
+    cookie_auth.set_auth(request, user.id)
+
     if 'Chef' in user.role:
         return x.HTTPFound('/chef')
     elif 'Analyst' in user.role:
@@ -85,18 +79,45 @@ def login_post(request):
 
 @view_config(route_name='logout')
 def logout(request):
-    return {}
+    cookie_auth.logout(request)
+
+    return x.HTTPFound('/')
 
 ################ ROLES ################
 
 @view_config(route_name='diner', renderer='dins:templates/roles/diner.pt')
 def diner_page(request):
+    user_id = cookie_auth.get_user_id_via_auth_cookie(request)
+    user = user_services.find_user_by_id(user_id)
+    if not user:
+        return x.HTTPFound('/account/login')
     return {
+        'user': user,
         'titles': get_meals()
     }
 
-#note for future: if table meals_services has no data, page will crash.
-#Need some placeholder to display until chef puts data in
+@view_config(route_name='analyst', renderer='dins:templates/roles/analyst.pt')
+def analyst_page(request):
+    user_id = cookie_auth.get_user_id_via_auth_cookie(request)
+    user = user_services.find_user_by_id(user_id)
+    if not user:
+        return x.HTTPFound('/account/login')
+    return {
+        'user': user,
+        'titles': get_meals()
+    }
+
+@view_config(route_name='chef', renderer='dins:templates/roles/chef.pt')
+def chef_page(request):
+    user_id = cookie_auth.get_user_id_via_auth_cookie(request)
+    user = user_services.find_user_by_id(user_id)
+    if not user:
+        return x.HTTPFound('/account/login')
+    return {
+        'user': user,
+        'titles': get_meals()
+    }
+
 def get_meals():
     titles = meals_services.meal_title()
     desc = meals_services.meal_desc()
@@ -106,3 +127,10 @@ def get_meals():
         {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
         {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
     ]
+
+################ about ################
+
+@view_config(route_name='about', renderer='dins:templates/home/about.pt')
+def about_page(_):
+
+    return {}

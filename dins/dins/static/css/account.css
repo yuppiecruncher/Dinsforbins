@@ -29,6 +29,7 @@ form.account-form input.form-control {
 form.account-form button {
   margin-left: 200px;
   color: white;
+  background-color: #d55526;
 }
 
 div.dropdown-item {

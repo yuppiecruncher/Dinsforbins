@@ -6,7 +6,7 @@ body {
 .hero {
   background-color: #2a292a;
   color: #fff;
-  padding: 50px 0;
+  padding: 0px 0;
   text-align: center;
   line-height: 1.0em;
   font-size: 18px;
@@ -42,15 +42,12 @@ body {
   font-size: 25px;
 }
 
-.btn-secondary {
-  color: #2a292a;
-  background-color: a34110;
-  max-width: 150px;
+.btn_group {
+  text-align: center;
 }
 
-.btn {
-  width: 200px;
-  color: white;
+.btn_group button {
+  background-color: #d55526;
 }
 
 .container-fluid {

@@ -32,7 +32,7 @@ def login_user(email: str, password: str) -> Optional[User]:
     email = email.lower().strip()
 
     session = DbSession.factory()
-    user = session.query(User).filter(User.email == email).one()
+    user = session.query(User).filter(User.email == email).first()
 
     if not user:
         return None
@@ -41,3 +41,7 @@ def login_user(email: str, password: str) -> Optional[User]:
         return None
 
     return user
+
+def find_user_by_id(user_id: int) -> Optional[User]:
+    session = DbSession.factory()
+    return session.query(User).filter(User.id == user_id).first()

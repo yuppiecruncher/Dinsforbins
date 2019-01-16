@@ -2,7 +2,7 @@
     <div metal:fill-slot="content">
 
         <div class="content">
-            <h1>Welcome to Your Diner Page ${user.name}</h1>
+            <h1>Welcome to Your Analyst Page ${user.name}</h1>
             <div>To Do: Add meal selection form.</div><br>
               <div class="project" tal:repeat="t titles">
                   <div class="title">${t.name}</div>

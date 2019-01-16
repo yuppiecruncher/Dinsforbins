@@ -3,6 +3,8 @@ def includeme(config):
 
     #home controller
     config.add_route('index', '/')
+    config.add_route('about', '/about')
+
 
     #account controller
     config.add_route('account_home', '/account')
@@ -12,3 +14,5 @@ def includeme(config):
 
     # role controllers
     config.add_route('diner', '/diner')
+    config.add_route('chef', '/chef')
+    config.add_route('analyst', '/analyst')
