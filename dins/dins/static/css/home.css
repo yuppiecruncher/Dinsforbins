@@ -5,7 +5,7 @@ body {
 
 .hero {
   background-color: #2a292a;
-  color: #fff;
+  color: #bababa;
   padding: 0px 0;
   text-align: center;
   line-height: 1.0em;
@@ -54,13 +54,4 @@ body {
   position: relative;
   text-align: center;
   color: white;
-}
-
-.taglinetext {
-  background-color: rgba(#000000, 0.9);
-  font-size: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

@@ -6,7 +6,7 @@
               <h1>Family Dinner Planning Made Easier</h1>
               <br>
             </div>
-            <img src="../static/img/reducedsplash.jpg" alt="Join us for dinner" style="width:100%;">
+            <img src="../static/img/reducedsplash.jpg" alt="Picture of diners raising their glasses in a toast." style="width:100%;">
         </div>
     </div>
     <div metal:fill-slot="additional-css">
