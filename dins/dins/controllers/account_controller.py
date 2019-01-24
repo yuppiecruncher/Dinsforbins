@@ -91,6 +91,10 @@ def diner_page(request):
     user = user_services.find_user_by_id(user_id)
     if not user:
         return x.HTTPFound('/account/login')
+    if 'Chef' in user.role:
+        return x.HTTPUnauthorized()
+    if 'Analyst' in user.role:
+        return x.HTTPUnauthorized()
     return {
         'user': user,
         'titles': get_meals()
@@ -102,6 +106,10 @@ def analyst_page(request):
     user = user_services.find_user_by_id(user_id)
     if not user:
         return x.HTTPFound('/account/login')
+    if 'Chef' in user.role:
+            return x.HTTPUnauthorized()
+    if 'Diner' in user.role:
+            return x.HTTPUnauthorized()
     return {
         'user': user,
         'titles': get_meals()
@@ -113,6 +121,10 @@ def chef_page(request):
     user = user_services.find_user_by_id(user_id)
     if not user:
         return x.HTTPFound('/account/login')
+    if 'Diner' in user.role:
+            return x.HTTPUnauthorized()
+    if 'Analyst' in user.role:
+            return x.HTTPUnauthorized()
     return {
         'user': user,
         'titles': get_meals()
