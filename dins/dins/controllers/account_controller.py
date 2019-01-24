@@ -3,6 +3,7 @@ from pyramid.view import view_config
 from dins.data_services import user_services
 from dins.data_services import meals_services
 from dins.infrastructure import cookie_auth
+from dins.infrastructure import request_dict
 
 ################ REGISTRATION ################
 
