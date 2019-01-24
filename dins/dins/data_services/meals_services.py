@@ -50,3 +50,13 @@ def meal_date():
 
     for m in date_list:
         return date_list
+
+def get_meals():
+    titles = meal_title()
+    desc = meal_desc()
+    date = meal_date()
+    return [
+        {'name': titles[0], 'description': desc[0], 'date': date[0].strftime("%A, %B, %d"),},
+        {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
+        {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
+    ]

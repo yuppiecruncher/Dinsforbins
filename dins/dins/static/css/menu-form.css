@@ -1,0 +1,25 @@
+
+form.menu-form {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  background-color: #525252;
+  color: #222;
+  border: 1px solid gray;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  max-width: 95%;
+}
+
+form.menu-form * {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+form.menu-form button {
+  margin-left: 200px;
+  color: white;
+  background-color: #d55526;
+}

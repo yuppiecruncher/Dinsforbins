@@ -8,12 +8,12 @@ class RequestDictionary(dict):
         return self.get(key)
 
 
-def create(request: Request) -> RequestDictionary:
+def create(request: Request) -> RequestDictionary: #prioritized in order for security
     data = {
-        **request.GET,
-        **request.headers,
-        **request.POST,
-        **request.matchdict,
+        **request.GET, # query string
+        **request.headers, #HTTP headers
+        **request.POST, # form valuse
+        **request.matchdict, # routing options
     }
 
     return RequestDictionary(data)

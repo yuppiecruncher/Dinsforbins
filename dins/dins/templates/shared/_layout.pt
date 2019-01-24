@@ -48,9 +48,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="/account/login">Login</a></li>
-                        <li><a href="/account/register">Register</a></li>
-                        <li><a href="/account/logout">Logout</a></li>
+
+                        <li><a href="/account/login" tal:condition="not user_id">Login</a></li>
+                        <li><a href="/account/register" tal:condition="not user_id">Register</a></li>
+
+                        <li><a href="/account" tal:condition="user_id">Account</a></li>
+
+                        <li><a href="/account/logout" tal:condition="user_id">Logout</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
