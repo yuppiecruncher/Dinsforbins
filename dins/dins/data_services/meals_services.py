@@ -1,23 +1,26 @@
 from dins import DbSession
 from typing import *
 from dins.data.meals import Meal
-import datetime
+from datetime import datetime
 
-# def meal_title():
-#     session = DbSession.factory()
-#     # meals = session.query(Meal.meal_title).all()
-#     # query = session.query(Meal.meal_title)
-#     for row in meals:
-#         return (row._asdict())
+####################### ADD MEALS TO DB ####################################################
 
+def create_meal(title: str, menudescription: str, available: str) -> Meal:
+    meal = Meal()
+    meal.meal_title = title
+    meal.meal_description = menudescription
+    date_input = available
+    year, month, day = map(int, date_input.split('-'))
+    date1 = datetime.date(year, month, day)
+    meal.meal_avail_date = date1
 
+    session = DbSession.factory()
+    session.add(meal)
+    session.commit()
 
-# def meal_title():
-#     session = DbSession.factory()
-#     query = session.query(Meal.meal_title)
-#     for row in query:
-#         return (row._asdict())
+    return meal
 
+####################### QUERY MEALS FOR DISPLAY ####################################################
 def meal_title():
     session = DbSession.factory()
 

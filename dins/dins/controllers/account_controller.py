@@ -5,40 +5,29 @@ from dins.data_services import meals_services
 from dins.infrastructure import cookie_auth
 from dins.infrastructure import request_dict
 from dins.viewmodels.account.account_home_viewmodel import AccountHomeViewModel
+from dins.viewmodels.account.register_viewmodel import RegisterViewModel
+from dins.viewmodels.account.login_viewmodel import LoginViewModel
+from dins.viewmodels.account.chef_form_viewmodel import ChefFormViewModel
+
+from datetime import datetime
 
 ################ REGISTRATION ################
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='GET')
 def register_get(request):
-    return {
-        'email': None,
-        'name': None,
-        'password': None,
-        'role': None,
-        'error' : None,
-        'user_id': cookie_auth.get_user_id_via_auth_cookie(request)
-
-    }
+    vm = RegisterViewModel(request)
+    return vm.to_dict()
 
 @view_config(route_name='register', renderer='dins:templates/account/register.pt', request_method='POST')
 def register_post(request):
+    vm = RegisterViewModel(request)
+    vm.validate()
 
-    email = request.POST.get('email')
-    name = request.POST.get('name')
-    password = request.POST.get('password')
-    role = request.POST.get('role')
+    if vm.error:
+        return vm.to_dict()
 
-    if not email or not name or not password or not role:
-        return {
-            'email': email,
-            'name': name,
-            'password': password,
-            'role': role,
-            'error': 'Some required fields are missing.',
-            'user_id': cookie_auth.get_user_id_via_auth_cookie(request)
-        }
     # create user
-    user = user_services.create_user(email, name, password, role)
+    user = user_services.create_user(vm.email, vm.name, vm.password, vm.role)
     cookie_auth.set_auth(request, user.id)
 
     if 'Chef' in user.role:
@@ -52,35 +41,25 @@ def register_post(request):
 
 @view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='GET')
 def login_get(request):
-    return {
-        'email': None,
-        'password': None,
-        'error' : None,
-        'user_id': cookie_auth.get_user_id_via_auth_cookie(request)
-    }
+    vm = LoginViewModel(request)
+    return vm.to_dict()
 
 @view_config(route_name='login', renderer='dins:templates/account/login.pt', request_method='POST')
 def login_post(request):
-    data = request_dict.create(request)
-    email = data.email
-    password = data.password
-    user = user_services.login_user(email, password)
+    vm = LoginViewModel(request)
+    vm.validate()
 
-    if not user:
-        return {
-            'email': email,
-            'password': password,
-            'error': 'The user could not be found or the password is incorrect.',
-            'user_id': cookie_auth.get_user_id_via_auth_cookie(request)
-        }
+    if vm.error:
+        return vm.to_dict()
+
     # create cookie session
-    cookie_auth.set_auth(request, user.id)
+    cookie_auth.set_auth(request, vm.user.id)
 
-    if 'Chef' in user.role:
+    if 'Chef' in vm.user.role:
         return x.HTTPFound('/chef')
-    elif 'Analyst' in user.role:
+    elif 'Analyst' in vm.user.role:
         return x.HTTPFound('/analyst')
-    elif 'Diner' in user.role:
+    elif 'Diner' in vm.user.role:
         return x.HTTPFound('/diner')
 
 ################ LOGOUT ################
@@ -120,6 +99,7 @@ def diner_page(request):
         'titles': meals_services.get_meals(),
         'user_id': vm.user.id
     }
+    return vm.to_dict()
 
 @view_config(route_name='analyst', renderer='dins:templates/roles/analyst.pt')
 def analyst_page(request):
@@ -134,23 +114,53 @@ def analyst_page(request):
         'user': vm.user,
         'titles': meals_services.get_meals(),
         'user_id': vm.user.id
-
     }
 
-@view_config(route_name='chef', renderer='dins:templates/roles/chef.pt')
-def chef_page(request):
-    vm = AccountHomeViewModel(request)
+@view_config(route_name='chef', renderer='dins:templates/roles/chef.pt', request_method="GET")
+def chef_get(request):
+    vm = ChefFormViewModel(request)
+    return vm.to_dict()
+
     if not vm.user:
         return x.HTTPFound('/account/login')
     if 'Diner' in vm.user.role:
-            return x.HTTPUnauthorized()
+        return x.HTTPUnauthorized()
     if 'Analyst' in vm.user.role:
-            return x.HTTPUnauthorized()
-    return {
-        'user': vm.user,
-        'titles': meals_services.get_meals(),
-        'user_id': vm.user.id
-    }
+        return x.HTTPUnauthorized()
+
+@view_config(route_name='chef', renderer='dins:templates/roles/chef.pt', request_method='POST')
+def chef_post(request):
+    vm = ChefFormViewModel(request)
+    vm.validate()
+
+    if vm.error:
+        return vm.to_dict()
+
+
+
+
+    print(
+        'available: ', vm.available,
+        'title: ', vm.title,
+        'menudescription: ', vm.menudescription
+        )
+
+
+    #create meal
+
+    meals_services.create_meal(vm.title, vm.menudescription, vm.available)
+
+    return vm.to_dict()
+
+
+    # if not vm.user:
+    #     return x.HTTPFound('/account/login')
+    # if 'Diner' in vm.user.role:
+    #     return x.HTTPUnauthorized()
+    # if 'Analyst' in vm.user.role:
+    #     return x.HTTPUnauthorized()
+
+
 
 ################ ABOUT ################
 

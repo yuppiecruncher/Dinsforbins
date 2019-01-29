@@ -12,7 +12,7 @@ def create(request: Request) -> RequestDictionary: #prioritized in order for sec
     data = {
         **request.GET, # query string
         **request.headers, #HTTP headers
-        **request.POST, # form valuse
+        **request.POST, # form values
         **request.matchdict, # routing options
     }
 
