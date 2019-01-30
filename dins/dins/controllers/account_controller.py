@@ -135,32 +135,11 @@ def chef_post(request):
 
     if vm.error:
         return vm.to_dict()
-
-
-
-
-    print(
-        'available: ', vm.available,
-        'title: ', vm.title,
-        'menudescription: ', vm.menudescription
-        )
-
-
     #create meal
 
-    meals_services.create_meal(vm.title, vm.menudescription, vm.available)
+    meals_services.create_meal(vm.title, vm.menudescription, vm.available, vm.user_id, vm.diner_email)
 
     return vm.to_dict()
-
-
-    # if not vm.user:
-    #     return x.HTTPFound('/account/login')
-    # if 'Diner' in vm.user.role:
-    #     return x.HTTPUnauthorized()
-    # if 'Analyst' in vm.user.role:
-    #     return x.HTTPUnauthorized()
-
-
 
 ################ ABOUT ################
 

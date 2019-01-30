@@ -10,11 +10,20 @@ class ChefFormViewModel(ViewModelBase):
 
         self.title = self.request_dict.get('title')
         self.menudescription = self.request_dict.get('itemdescription')
+        self.diner_email = self.request_dict.get('diner_email')
+
         self.available = self.request_dict.get('available')
         self.user = user_services.find_user_by_id(self.user_id)
         self.titles = meals_services.get_meals()
 
+        self.diner = None
+
+        if self.diner_email:
+            self.diner = meals_services.diner_validation(self.diner_email)
+
     def validate(self):
+        if not self.diner:
+            self.error = 'Check your diners information and try again.'
         if not self.available:
             self.error = 'You must specify an availability date.'
         if not self.menudescription:

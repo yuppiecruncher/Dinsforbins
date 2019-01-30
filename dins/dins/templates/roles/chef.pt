@@ -20,6 +20,8 @@
                 <textarea style="color:black;" name="itemdescription" rows="4" cols="50" placeholder="Enter description... 200 characters">${menudescription}</textarea>
                 <h4>Select dates available.</h4>
                 <input style="color:black;" name="available" type="date" class="menu-control">
+                  <h4>Enter your intended diners' email address.</h4>
+                <input style="color:black;" name="diner_email" type="text" class="menu-control">
                 <button type="submit" class="btn btn-lg btn-secondary"> Submit</button>
                 <div class="error-msg" tal:condition="error">${error}</div>
               </form>

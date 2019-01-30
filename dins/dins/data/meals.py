@@ -11,3 +11,5 @@ class Meal(SqlAlchemyBase):
     meal_avail_date = sa.Column(sa.DateTime, index=True)
     meal_title = sa.Column(sa.String)
     meal_description = sa.Column(sa.String)
+    chef_id = sa.Column(sa.Integer)
+    diner_id = sa.Column(sa.Integer)
