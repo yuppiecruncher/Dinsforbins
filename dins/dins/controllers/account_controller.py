@@ -1,7 +1,9 @@
 import pyramid.httpexceptions as x
 from pyramid.view import view_config
 from dins.data_services import user_services
-from dins.data_services import meals_services
+from dins.data_services import diner_services
+from dins.data_services import chef_services
+from dins.data_services import register_email_service
 from dins.infrastructure import cookie_auth
 from dins.infrastructure import request_dict
 from dins.viewmodels.account.account_home_viewmodel import AccountHomeViewModel
@@ -29,6 +31,7 @@ def register_post(request):
     # create user
     user = user_services.create_user(vm.email, vm.name, vm.password, vm.role)
     cookie_auth.set_auth(request, user.id)
+    ############################ register_email_service.generate_welcome_email(vm.name, vm.email, vm.role)
 
     if 'Chef' in user.role:
         return x.HTTPFound('/chef')
@@ -88,6 +91,8 @@ def account_redirect(request):
 @view_config(route_name='diner', renderer='dins:templates/roles/diner.pt')
 def diner_page(request):
     vm = AccountHomeViewModel(request)
+
+
     if not vm.user:
         return x.HTTPFound('/account/login')
     if 'Chef' in vm.user.role:
@@ -96,7 +101,7 @@ def diner_page(request):
         return x.HTTPUnauthorized()
     return {
         'user': vm.user,
-        'titles': meals_services.get_meals(),
+        'titles': diner_services.get_diner_meals(vm.user_id),
         'user_id': vm.user.id
     }
     return vm.to_dict()
@@ -112,7 +117,7 @@ def analyst_page(request):
             return x.HTTPUnauthorized()
     return {
         'user': vm.user,
-        'titles': meals_services.get_meals(),
+        'titles': chef_services.get_meals(),
         'user_id': vm.user.id
     }
 
@@ -137,7 +142,7 @@ def chef_post(request):
         return vm.to_dict()
     #create meal
 
-    meals_services.create_meal(vm.title, vm.menudescription, vm.available, vm.user_id, vm.diner_email)
+    chef_services.create_meal(vm.title, vm.menudescription, vm.available, vm.user_id, vm.diner_email)
 
     return vm.to_dict()
 

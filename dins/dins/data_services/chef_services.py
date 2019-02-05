@@ -3,6 +3,7 @@ from typing import *
 from dins.data.meals import Meal
 from dins.data.users import User
 import datetime
+from dins.data_services import user_services
 
 
 ####################### ADD MEALS TO DB ####################################################
@@ -45,45 +46,22 @@ def diner_validation(diner_email: str):
 
 
 ####################### QUERY MEALS FOR DISPLAY ####################################################
-def meal_title():
+def get_meals(user_id: int):
+
     session = DbSession.factory()
 
-    meals = session.query(Meal).order_by(Meal.meal_avail_date.desc())
-
+    meals = session.query(Meal).filter(Meal.chef_id == user_id)
     meal_titles_list = [m.meal_title for m in meals]
+    description_list = [m.meal_description for m in meals]
+    date_list = [m.meal_avail_date for m in meals]
+    if not meals:
+        return None
 
-    for m in meal_titles_list:
-        return meal_titles_list
+    return meal_titles_list, description_list, date_list
 
-def meal_desc():
-    session = DbSession.factory()
 
-    descriptions = session.query(Meal).order_by(Meal.meal_avail_date.desc())
-
-    description_list = [m.meal_description for m in descriptions]
-
-    for m in description_list:
-        return description_list
-
-def meal_date():
-    session = DbSession.factory()
-
-    date_query = session.query(Meal).order_by(Meal.meal_avail_date.desc())
-
-    date_list = [m.meal_avail_date for m in date_query]
-
-    # for m in date_list:
-    #     formatted_date_list = date_list
-
-    for m in date_list:
-        return date_list
-
-def get_meals():
-    titles = meal_title()
-    desc = meal_desc()
-    date = meal_date()
-    return [
-        {'name': titles[0], 'description': desc[0], 'date': date[0].strftime("%A, %B, %d"),},
-        {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
-        {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
-    ]
+    # [
+    #     {'name': titles[0], 'description': desc[0], 'date': date[0].strftime("%A, %B, %d"),},
+    #     # {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
+    #     # {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
+    # ]

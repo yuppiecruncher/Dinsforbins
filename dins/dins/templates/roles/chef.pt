@@ -3,14 +3,16 @@
 
         <div class="content">
             <h1>Welcome to Your Chef Page ${user.name}</h1>
-            <div>To Do: Add meal selection form.</div><br>
             <div class="col-sm-6" style="background-color:None;">
-
-              <div class="project" tal:repeat="t titles">
-                  <div class="title">${t.name}</div>
-                  <div class="description">${t.description}</div>
-                  <div class="date">Available Date: ${t.date}</div>
+              <div tal:condition="titles">
+                <h3>Current Menu Options:</h3>
+              <div class="project" >
+                  <div class="title">${titles}</div>
                   <br>
+            </div>
+            </div>
+            <div tal:condition="not titles">
+              <h3>There are no meals to display</h3>
             </div>
           </div>
             <div class="col-sm-6" style="background-color:None;">
@@ -25,6 +27,7 @@
                 <button type="submit" class="btn btn-lg btn-secondary"> Submit</button>
                 <div class="error-msg" tal:condition="error">${error}</div>
               </form>
+              <br>
             </div>
 
         </div>

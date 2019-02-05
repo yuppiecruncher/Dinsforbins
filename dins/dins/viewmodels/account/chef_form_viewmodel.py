@@ -2,7 +2,7 @@
 from pyramid.request import Request
 from dins.viewmodels.shared.viewmodel_base import ViewModelBase
 from dins.data_services import user_services
-from dins.data_services import meals_services
+from dins.data_services import chef_services
 
 class ChefFormViewModel(ViewModelBase):
     def __init__(self, request: Request):
@@ -14,12 +14,12 @@ class ChefFormViewModel(ViewModelBase):
 
         self.available = self.request_dict.get('available')
         self.user = user_services.find_user_by_id(self.user_id)
-        self.titles = meals_services.get_meals()
+        self.titles = chef_services.get_meals(self.user_id)
 
         self.diner = None
 
         if self.diner_email:
-            self.diner = meals_services.diner_validation(self.diner_email)
+            self.diner = chef_services.diner_validation(self.diner_email)
 
     def validate(self):
         if not self.diner:
