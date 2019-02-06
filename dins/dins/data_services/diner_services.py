@@ -5,64 +5,113 @@ from dins.data.users import User
 import datetime
 
 
-####################### QUERY DINER MEALS FOR THE WEEK ####################################################
-# def get_diner_meals(user_id: int):
-#     session = DbSession.factory()
-#
-#     meals_query = session.query(Meal).filter(Meal.diner_id == user_id)
-#
-#     titles = [t.meal_title for t in meals_query]
-#     description = [d.meal_description for d in meals_query]
-#
-#     return titles, description
+################## QUERY FOR WEEKLY MEALS BY DAY #####################################################
+def date_today():
+    today = datetime.datetime.now()
+    today = today.replace(hour=0, minute=0, second=0, microsecond=0)
+    return today
 
-
-
-
-
-
-def meal_title(d_id):
+def query_today(user_id: int):
+    day = date_today()
     session = DbSession.factory()
-
-    meals = session.query(Meal).filter(Meal.diner_id == d_id)
-    meal_titles_list = [m.meal_title for m in meals]
-
-    for m in meal_titles_list:
-        return meal_titles_list
-
-def meal_desc(d_id):
-    session = DbSession.factory()
-
-    descriptions = session.query(Meal).filter(Meal.diner_id == d_id)
-
-    description_list = [m.meal_description for m in descriptions]
-
-    for m in description_list:
-        return description_list
-
-def meal_date(d_id):
-    session = DbSession.factory()
-
-    date_query = session.query(Meal).filter(Meal.diner_id == d_id)
-
-    date_list = [m.meal_avail_date for m in date_query]
-
-    # for m in date_list:
-    #     formatted_date_list = date_list
-
-    for m in date_list:
-        return date_list
-
-def get_diner_meals(user_id: int):
-    d_id = user_id
-    titles = meal_title(d_id)
-    desc = meal_desc(d_id)
-    date = meal_date(d_id)
-    if not titles or not desc or not date:
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
         return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
 
-    return [
-        {'name': titles[0], 'description': desc[0], 'date': date[0].strftime("%A, %B, %d"),},
-        {'name': titles[1], 'description': desc[1], 'date': date[1].strftime("%A, %B, %d"),},
-        {'name': titles[2], 'description': desc[2], 'date': date[2].strftime("%A, %B, %d"),},
-    ]
+def query_tp1(user_id: int):
+    day = date_today() + datetime.timedelta(days=1)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+def query_tp2(user_id: int):
+    day = date_today() + datetime.timedelta(days=2)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+def query_tp3(user_id: int):
+    day = date_today() + datetime.timedelta(days=3)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+def query_tp4(user_id: int):
+    day = date_today() + datetime.timedelta(days=4)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+def query_tp5(user_id: int):
+    day = date_today() + datetime.timedelta(days=5)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+def query_tp6(user_id: int):
+    day = date_today() + datetime.timedelta(days=6)
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list

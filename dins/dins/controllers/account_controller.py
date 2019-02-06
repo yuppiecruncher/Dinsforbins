@@ -10,7 +10,8 @@ from dins.viewmodels.account.account_home_viewmodel import AccountHomeViewModel
 from dins.viewmodels.account.register_viewmodel import RegisterViewModel
 from dins.viewmodels.account.login_viewmodel import LoginViewModel
 from dins.viewmodels.account.chef_form_viewmodel import ChefFormViewModel
-
+from dins.viewmodels.account.diner_form_viewmodel import DinerFormViewModel
+from dins.viewmodels.account.analyst_form_viewmodel import AnalystFormViewModel
 from datetime import datetime
 
 ################ REGISTRATION ################
@@ -30,8 +31,8 @@ def register_post(request):
 
     # create user
     user = user_services.create_user(vm.email, vm.name, vm.password, vm.role)
+    #set cookie for new user
     cookie_auth.set_auth(request, user.id)
-    ############################ register_email_service.generate_welcome_email(vm.name, vm.email, vm.role)
 
     if 'Chef' in user.role:
         return x.HTTPFound('/chef')
@@ -90,8 +91,8 @@ def account_redirect(request):
 
 @view_config(route_name='diner', renderer='dins:templates/roles/diner.pt')
 def diner_page(request):
-    vm = AccountHomeViewModel(request)
-
+    vm = DinerFormViewModel(request)
+    return vm.to_dict()
 
     if not vm.user:
         return x.HTTPFound('/account/login')
@@ -99,27 +100,18 @@ def diner_page(request):
         return x.HTTPUnauthorized()
     if 'Analyst' in vm.user.role:
         return x.HTTPUnauthorized()
-    return {
-        'user': vm.user,
-        'titles': diner_services.get_diner_meals(vm.user_id),
-        'user_id': vm.user.id
-    }
-    return vm.to_dict()
 
 @view_config(route_name='analyst', renderer='dins:templates/roles/analyst.pt')
 def analyst_page(request):
-    vm = AccountHomeViewModel(request)
+    vm = AnalystFormViewModel(request)
+    return vm.to_dict()
+
     if not vm.user:
         return x.HTTPFound('/account/login')
     if 'Chef' in vm.user.role:
             return x.HTTPUnauthorized()
     if 'Diner' in vm.user.role:
             return x.HTTPUnauthorized()
-    return {
-        'user': vm.user,
-        'titles': chef_services.get_meals(),
-        'user_id': vm.user.id
-    }
 
 @view_config(route_name='chef', renderer='dins:templates/roles/chef.pt', request_method="GET")
 def chef_get(request):
@@ -140,8 +132,8 @@ def chef_post(request):
 
     if vm.error:
         return vm.to_dict()
+        
     #create meal
-
     chef_services.create_meal(vm.title, vm.menudescription, vm.available, vm.user_id, vm.diner_email)
 
     return vm.to_dict()

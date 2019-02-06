@@ -3,18 +3,28 @@
 
         <div class="content">
             <h1>Welcome to Your Chef Page ${user.name}</h1>
-            <div class="col-sm-6" style="background-color:None;">
-              <div tal:condition="titles">
-                <h3>Current Menu Options:</h3>
-              <div class="project" >
-                  <div class="title">${titles}</div>
-                  <br>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="today">
+              <h4>Today: ${today[0]}: ${today[1]} available: ${today[2]} </h4>
             </div>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp1">
+              <h4>Tomorrow: ${tp1[0]}: ${tp1[1]} available: ${tp1[2]} </h4>
             </div>
-            <div tal:condition="not titles">
-              <h3>There are no meals to display</h3>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp2">
+              <h4>Next: ${tp2[0]}: ${tp2[1]} available: ${tp2[2]} </h4>
             </div>
-          </div>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp3">
+              <h4>Next: ${tp3[0]}: ${tp3[1]} available: ${tp3[2]} </h4>
+            </div>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp4">
+              <h4>Next: ${tp4[0]}: ${tp4[1]} available: ${tp4[2]} </h4>
+            </div>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp5">
+              <h4>Next: ${tp5[0]}: ${tp5[1]} available: ${tp5[2]} </h4>
+            </div>
+            <div class="col-sm-6" style="background-color:None;" tal:condition="tp6">
+              <h4>Next: ${tp6[0]}: ${tp6[1]} available: ${tp6[2]} </h4>
+            </div>
+
             <div class="col-sm-6" style="background-color:None;">
               <h3>Add a new meal:</h3>
               <form action="" method="POST" class="menu-form">

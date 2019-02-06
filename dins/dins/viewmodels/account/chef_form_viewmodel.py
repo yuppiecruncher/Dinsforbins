@@ -7,20 +7,25 @@ from dins.data_services import chef_services
 class ChefFormViewModel(ViewModelBase):
     def __init__(self, request: Request):
         super().__init__(request)
+        #### GLOBAL ####
+        self.user = user_services.find_user_by_id(self.user_id)
 
+        #### FORM INPUTS ############
         self.title = self.request_dict.get('title')
         self.menudescription = self.request_dict.get('itemdescription')
         self.diner_email = self.request_dict.get('diner_email')
-
         self.available = self.request_dict.get('available')
-        self.user = user_services.find_user_by_id(self.user_id)
-        self.titles = chef_services.get_meals(self.user_id)
 
-        self.diner = None
+        #### WEEKLY MEAL CALENDAR####
+        self.today = chef_services.query_today(self.user_id)
+        self.tp1 = chef_services.query_tp1(self.user_id)
+        self.tp2 = chef_services.query_tp2(self.user_id)
+        self.tp3 = chef_services.query_tp3(self.user_id)
+        self.tp4 = chef_services.query_tp4(self.user_id)
+        self.tp5 = chef_services.query_tp5(self.user_id)
+        self.tp6 = chef_services.query_tp6(self.user_id)
 
-        if self.diner_email:
-            self.diner = chef_services.diner_validation(self.diner_email)
-
+        #### ERROR HANDLING ####
     def validate(self):
         if not self.diner:
             self.error = 'Check your diners information and try again.'
