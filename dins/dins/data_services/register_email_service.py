@@ -20,6 +20,6 @@ def generate_welcome_email(name: str, email: str, role: str):
     smtp.ehlo()
     smtp.starttls()
     smtp.ehlo()
-    smtp.login('yuppiecruncher@gmail.com', 'Fuz$y83@r!')
-    smtp.sendmail('yuppiecruncher@gmail.com', email, message_content)
+    smtp.login('#######@###.com', '#####')
+    smtp.sendmail('#######@####.com', email, message_content)
     smtp.quit()

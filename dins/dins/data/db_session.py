@@ -14,11 +14,11 @@ class DbSession:
 
         if not db_file or not  db_file.strip():
             raise Exception("You must specify a data file.")
-
         conn_str = 'sqlite:///'+db_file
-        #print("Connecting to DB at: {}".format(conn_str))
 
-        engine = sqlalchemy.create_engine(conn_str, echo=False)
+        #connect_args={'check_same_thread':False} --fixed errors for thread handling in sqlite
+
+        engine = sqlalchemy.create_engine(conn_str, connect_args={'check_same_thread':False}, echo=False)
         DbSession.engine = engine
         DbSession.factory = sqlalchemy.orm.sessionmaker(bind=engine)
 
