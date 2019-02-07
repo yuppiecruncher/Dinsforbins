@@ -15,6 +15,8 @@ def insert_some_data():
     m.meal_title = input("Meal title: ")
     m.meal_description = input("Meal description: ")
     date_input = input("Meal available dates ('YYYY-MM-DD format'): ")
+    m.chef_id = input("Chef id: ")
+    m.diner_id = input("Diner id: ")
     year, month, day = map(int, date_input.split('-'))
     date1 = datetime.date(year, month, day)
     m.meal_avail_date = date1
