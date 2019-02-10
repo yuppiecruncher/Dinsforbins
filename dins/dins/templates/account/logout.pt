@@ -10,7 +10,7 @@
 
     </div>
     <div metal:fill-slot="additional-css">
-      <link href="${request.static_url('dins:static/css/account.css')}" rel="stylesheet">
+      <!-- <link href="${request.static_url('dins:static/css/account.css')}" rel="stylesheet"> -->
 
     </div>
 </div>

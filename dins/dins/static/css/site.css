@@ -1,7 +1,6 @@
 body {
-  color: #ffff;
-}
-
-.error-msg {
-  color: #f95252;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  color: rgb(221, 221, 221);
+  background-color: rgb(65, 65, 65);
 }
