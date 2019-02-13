@@ -3,29 +3,77 @@
 
         <div class="content">
             <h1>Welcome to Your Diner Page ${user.name}</h1>
-            <div>To Do: Add meal selection form.</div><br>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="today">
-              <h4>Today: ${today[0]}: ${today[1]} available: ${today[2]} </h4>
+            <div class="cal_title">
+              <h4>Your meals for the next week:</h4>
             </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp1">
-              <h4>Tomorrow: ${tp1[0]}: ${tp1[1]} available: ${tp1[2]} </h4>
-            </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp2">
-              <h4>Next: ${tp2[0]}: ${tp2[1]} available: ${tp2[2]} </h4>
-            </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp3">
-              <h4>Next: ${tp3[0]}: ${tp3[1]} available: ${tp3[2]} </h4>
-            </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp4">
-              <h4>Next: ${tp4[0]}: ${tp4[1]} available: ${tp4[2]} </h4>
-            </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp5">
-              <h4>Next: ${tp5[0]}: ${tp5[1]} available: ${tp5[2]} </h4>
-            </div>
-            <div class="col-sm-6" style="background-color:None;" tal:condition="tp6">
-              <h4>Next: ${tp6[0]}: ${tp6[1]} available: ${tp6[2]} </h4>
-            </div>
+            <div class="calendar_container">
+                <!-- [0] = title, [1] = description, [2] = datestr -->
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not today">Request</a>
+                <p tal:condition="today">${today[2]}</p>
+                <div class="two" tal:condition="today">${today[0]}
+                  <br>
+                  ${today[1]}
+                </div>
+              </div>
+
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp1">Request</a>
+                <p tal:condition="tp1">${tp1[2]}</p>
+                <div class="two" tal:condition="tp1">${tp1[0]}
+                  <br>
+                  ${tp1[1]}
+                </div>
+              </div>
+
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp2">Request</a>
+                <p tal:condition="tp2">${tp2[2]}</p>
+                <div class="two" tal:condition="tp2">${tp2[0]}
+                  <br>
+                  ${tp2[1]}
+                </div>
+              </div>
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp3">Request</a>
+                <p tal:condition="tp3">${tp3[2]}</p>
+                <div class="two" tal:condition="tp3">${tp3[0]}
+                  <br>
+                  ${tp3[1]}
+                </div>
+              </div>
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp4">Request</a>
+                <p tal:condition="tp4">${tp4[2]}</p>
+                <div class="two" tal:condition="tp4">${tp4[0]}
+                  <br>
+                  ${tp4[1]}
+                </div>
+              </div>
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp5">Request</a>
+                <p tal:condition="tp5">${tp5[2]}</p>
+                <div class="two" tal:condition="tp5">${tp5[0]}
+                  <br>
+                  ${tp5[1]}
+                </div>
+              </div>
+              <div class="one">
+                <a id="calendar_link" class="addmeal" href="/diner/request" tal:condition="not tp6">Request</a>
+                <p tal:condition="tp6">${tp6[2]}</p>
+                <div class="two" tal:condition="tp6">${tp6[0]}
+                  <br>
+                  ${tp6[1]}
+                </div>
+              </div>
 
         </div>
     </div>
+    <div metal:fill-slot="additional-css">
+      <link href="${request.static_url('dins:static/css/forms.css')}" rel="stylesheet">
+      <link href="${request.static_url('dins:static/css/calendar.css')}" rel="stylesheet">
+
+    </div>
+
+</div>
 </div>

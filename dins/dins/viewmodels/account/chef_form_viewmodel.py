@@ -10,12 +10,6 @@ class ChefFormViewModel(ViewModelBase):
         #### GLOBAL ####
         self.user = user_services.find_user_by_id(self.user_id)
 
-        #### FORM INPUTS ############
-        self.title = self.request_dict.get('title')
-        self.menudescription = self.request_dict.get('itemdescription')
-        self.diner_email = self.request_dict.get('diner_email')
-        self.available = self.request_dict.get('available')
-
         #### WEEKLY MEAL CALENDAR####
         self.today = chef_services.query_today(self.user_id)
         self.tp1 = chef_services.query_tp1(self.user_id)
@@ -25,9 +19,18 @@ class ChefFormViewModel(ViewModelBase):
         self.tp5 = chef_services.query_tp5(self.user_id)
         self.tp6 = chef_services.query_tp6(self.user_id)
 
+        #### ASSIGNED DINER DISPLAY ####
+        self.dinerlist = chef_services.query_assigned_diner(self.user_id)
+
+        #### FORM INPUTS ############
+        self.title = self.request_dict.get('title')
+        self.menudescription = self.request_dict.get('itemdescription')
+        self.diner_email = self.request_dict.get('diner_email')
+        self.available = self.request_dict.get('available')
+
         #### ERROR HANDLING ####
     def validate(self):
-        if not self.diner:
+        if not self.diner_email:
             self.error = 'Check your diners information and try again.'
         if not self.available:
             self.error = 'You must specify an availability date.'
@@ -35,3 +38,7 @@ class ChefFormViewModel(ViewModelBase):
             self.error = 'You must provide a description.'
         if not self.title:
             self.error = 'You must provide a title for this meal.'
+
+    def assign_diner_validate(self):
+        if not self.diner_email:
+            self.error = 'Check your diners information and try again.'

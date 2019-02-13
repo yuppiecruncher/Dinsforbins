@@ -20,6 +20,6 @@ def generate_welcome_email(name: str, email: str, role: str):
     smtp.ehlo()
     smtp.starttls()
     smtp.ehlo()
-    smtp.login('#######@###.com', '#####')
+    smtp.login('#######@###.com', '#####')#dins4bins_email.txt
     smtp.sendmail('#######@####.com', email, message_content)
     smtp.quit()

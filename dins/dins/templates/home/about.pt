@@ -3,14 +3,15 @@
 
         <div class="content">
             <h1>About Page</h1>
-            <div>
+            <div class="about-container">
+              <p id="about-paragraph">This web application will allow a user (diner) to reserve menu options and times from a list populated by a content producer- (the chef). A third user type (the analyst) will be able to see usage statistics, survey responses and other relevant data through a built-in dashboard.</p>
 
             </div>
         </div>
 
     </div>
     <div metal:fill-slot="additional-css">
-      <!-- <link href="${request.static_url('dins:static/css/account.css')}" rel="stylesheet"> -->
+      <link href="${request.static_url('dins:static/css/about.css')}" rel="stylesheet">
 
     </div>
 </div>

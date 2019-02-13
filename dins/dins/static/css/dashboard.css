@@ -1,0 +1,13 @@
+
+.chef-menu {
+  display: flex;
+  flex-direction: column;
+}
+.menubutton {
+  text-decoration: none;
+  color: white;
+}
+
+.cal_title *{
+  text-align: center;
+}

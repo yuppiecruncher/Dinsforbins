@@ -18,3 +18,20 @@ class DinerFormViewModel(ViewModelBase):
         self.tp4 = diner_services.query_tp4(self.user_id)
         self.tp5 = diner_services.query_tp5(self.user_id)
         self.tp6 = diner_services.query_tp6(self.user_id)
+
+        #### FORM INPUTS ############
+        self.title = self.request_dict.get('title')
+        self.menudescription = self.request_dict.get('itemdescription')
+        self.chef_email = self.request_dict.get('chef_email')
+        self.available = self.request_dict.get('available')
+
+        #### ERROR HANDLING ####
+    def validate(self):
+        if not self.chef_email:
+            self.error = 'Check your Chefs information and try again.'
+        if not self.available:
+            self.error = 'You must specify an availability date.'
+        if not self.menudescription:
+            self.error = 'You must provide a description.'
+        if not self.title:
+            self.error = 'You must provide a title for this meal.'

@@ -41,6 +41,11 @@ form.account-form button {
   font-size: 20px;
 }
 
+.account-form div.error-msg {
+  color: #ff6666;
+  font-weight: 900;
+}
+
 div.dropdown-item {
   display: inline-inline-block;
 }

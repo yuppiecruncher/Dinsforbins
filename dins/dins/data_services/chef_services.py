@@ -2,11 +2,42 @@ from dins import DbSession
 from typing import *
 from dins.data.meals import Meal
 from dins.data.users import User
+from dins.data.linked_users import Link
 from sqlalchemy.util import KeyedTuple
 import datetime
 from dins.data_services import user_services
 from sqlalchemy import and_
 
+####################### QUERY DINERS FOR DISPLAY ####################################################
+
+def query_assigned_diner(user_id: int):
+    session = DbSession.factory()
+    rows = session.query(Link).filter(Link.chef_id == user_id)
+    if not rows:
+        return None
+    diner_ids = [d.diner_id for d in rows]
+    diner_rows = session.query(User).filter(User.id.in_(diner_ids))
+
+    return diner_rows
+
+####################### ASSIGN DINERS TO CHEF ####################################################
+
+def assigned_diner(user_id: int, diner_email: str):
+    session = DbSession.factory()
+    ##### check if user exists #####
+    submitted_email = diner_email.lower().strip()
+    user = session.query(User).filter(User.email == submitted_email).first()
+
+    if not user:
+        return None
+
+    #### insert into linked table ###
+    link = Link()
+    link.chef_id = user_id
+    link.diner_id = user.id
+    session.add(link)
+    session.commit()
+    return link
 
 ####################### ADD MEALS TO DB ####################################################
 
@@ -32,7 +63,7 @@ def create_meal(title: str, menudescription: str, available: str, user_id: int, 
     meal.diner_id = diner_id
     session.add(meal)
     session.commit()
-    
+
     return meal
 
 def diner_validation(diner_email: str):

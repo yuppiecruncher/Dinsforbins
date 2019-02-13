@@ -13,7 +13,6 @@ The webapp is built upon the following stack:
 Pyramid Framework (https://trypyramid.com/)
 <p>  Cookiecutter for pyramid-starter (https://github.com/Pylons/pyramid-cookiecutter-starter)
 <p>   -utilizing Chameleon template
-<p>Twitter Bootstrap (https://getbootstrap.com/2.0.4/)
 <p>SQLAlchemy (and Alembic) (https://www.sqlalchemy.org/)
 <p>Postgresql (https://www.postgresql.org/)
 <p>Passlib (https://bitbucket.org/ecollins/passlib/wiki/Home)
