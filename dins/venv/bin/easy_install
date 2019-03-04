@@ -1,4 +1,4 @@
-#!/home/ian/github/Dinsforbins/dins/venv/bin/python
+#!/home/ian/projects/Dinsforbins/dins/venv/bin/python
 # EASY-INSTALL-ENTRY-SCRIPT: 'setuptools','console_scripts','easy_install'
 __requires__ = 'setuptools'
 import re

@@ -16,6 +16,7 @@ Pyramid Framework (https://trypyramid.com/)
 <p>SQLAlchemy (and Alembic) (https://www.sqlalchemy.org/)
 <p>Postgresql (https://www.postgresql.org/)
 <p>Passlib (https://bitbucket.org/ecollins/passlib/wiki/Home)
+<p>jQuery
 <p>Twilio (https://www.twilio.com/)
 
 
@@ -27,9 +28,7 @@ Planned functionality:
 -Email based confirmation, notifications and surveys
 -DB migration and modification with Alembic to allow for migration to postgresql or noSQL based DB such as MongoDb.
 
-To run this website on your local machine, you will need virtualenv(https://virtualenv.pypa.io/en/latest/). clone the repository to your machine. Using your command-line interface navigate to the folder 'dins' containing the development.ini file. Activate the virtual environment (on linux/mac it should be 'source venv/bin/activate') and run pserve development.ini . You can now open any browser and type 'localhost' to view the site.
-
-The first time this stack is run, install the dependencies by running "$ setup.py develop" in the virtual environment
+Clone the repository to your machine. Using your command-line interface navigate to the folder 'dins' containing the development.ini file. Create a virtual environment with $python3 -m venv venv. Activate the virtual environment (on linux/mac it should be $ 'source venv/bin/activate') and run $ python3 setup.py develop. this will install all dependencies. Now run $ pserve development.ini . Once the server is hosting You can now open any browser and type 'localhost' to view the site. Default port is 6543.
 
 You may wish to update pip and setuptools, depending on how out of date the versions included in the repository are. On mac/linux command line this is pip install -U pip setuptools.
 
