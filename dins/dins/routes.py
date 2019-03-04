@@ -5,7 +5,6 @@ def includeme(config):
     config.add_route('index', '/')
     config.add_route('about', '/about')
 
-
     #account controller
     config.add_route('account_home', '/account')
     config.add_route('login', '/account/login')
