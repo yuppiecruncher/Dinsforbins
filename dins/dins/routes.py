@@ -15,6 +15,6 @@ def includeme(config):
     config.add_route('diner', '/diner')
     config.add_route('diner_request', '/diner/request')
     config.add_route('chef', '/chef')
-    config.add_route('chef_add', '/chef/add')
-    config.add_route('chef_diners', '/chef/diners')
+    # config.add_route('chef_add', '/chef/add')
+    # config.add_route('chef_diners', '/chef/diners')
     config.add_route('analyst', '/analyst')

@@ -13,4 +13,4 @@ class Meal(SqlAlchemyBase):
     meal_description = sa.Column(sa.String)
     chef_id = sa.Column(sa.Integer)
     diner_id = sa.Column(sa.Integer)
-    requested_by_diner = sa.Column(sa.Integer)
+    requested_by_diner = sa.Column(sa.Integer) #diner_services will break with removal.

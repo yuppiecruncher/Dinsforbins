@@ -4,83 +4,11 @@
         <div class="content">
             <h1>Welcome to Your Chef Page ${user.name}</h1>
 
-          <div class="cal_title">
-            <h4>Your meals for the next week:</h4>
-          </div>
-          <div class="calendar_container">
-              <!-- [0] = title, [1] = description, [2] = datestr -->
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="today">${today[2]}</p>
-              <div class="two" tal:condition="today">${today[0]}
-                <br>
-                ${today[1]}
-              </div>
-            </div>
-
-            <div class="one">
-              <a class="addmeal" href="/chef/add" tal:condition="not tp1">Add Meal</a>
-              <p tal:condition="tp1">${tp1[2]}</p>
-              <div class="two" tal:condition="tp1">${tp1[0]}
-                <br>
-                ${tp1[1]}
-              </div>
-            </div>
-
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="tp2">${tp2[2]}</p>
-              <div class="two" tal:condition="tp2">${tp2[0]}
-                <br>
-                ${tp2[1]}
-              </div>
-            </div>
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="tp3">${tp3[2]}</p>
-              <div class="two" tal:condition="tp3">${tp3[0]}
-                <br>
-                ${tp3[1]}
-              </div>
-            </div>
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="tp4">${tp4[2]}</p>
-              <div class="two" tal:condition="tp4">${tp4[0]}
-                <br>
-                ${tp4[1]}
-              </div>
-            </div>
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="tp5">${tp5[2]}</p>
-              <div class="two" tal:condition="tp5">${tp5[0]}
-                <br>
-                ${tp5[1]}
-              </div>
-            </div>
-            <div class="one">
-              <a id="calendar_link" class="addmeal" href="/chef/add" tal:condition="not today">Add Meal</a>
-              <p tal:condition="tp6">${tp6[2]}</p>
-              <div class="two" tal:condition="tp6">${tp6[0]}
-                <br>
-                ${tp6[1]}
-              </div>
-            </div>
-
-          </div>
-          <div class="chef-menu">
-            <h3>Your current diners:</h3>
-            <div class="current-diners" tal:condition="dinerlist" tal:repeat="d dinerlist">
-             ${d.name}, ${d.email}
-            </div>
-            <a class="menubutton" href="/chef/diners"><h4>Add a Diner</h4></a>
-          </div>
         </div>
     </div>
     <div metal:fill-slot="additional-css">
-      <link href="${request.static_url('dins:static/css/calendar.css')}" rel="stylesheet">
-      <link href="${request.static_url('dins:static/css/dashboard.css')}" rel="stylesheet">
+      <!-- <link href="${request.static_url('dins:static/css/calendar.css')}" rel="stylesheet">
+      <link href="${request.static_url('dins:static/css/dashboard.css')}" rel="stylesheet"> -->
 
     </div>
 
