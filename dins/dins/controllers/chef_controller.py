@@ -17,6 +17,8 @@ def chef_get(request):
     if 'Analyst' in vm.user.role:
         return x.HTTPUnauthorized()
 
+        # remove all references to other pages.
+
 @view_config(route_name='chef_add', renderer='dins:templates/roles/chef_add.pt', request_method="GET")
 def chef_add_get(request):
     vm = ChefFormViewModel(request)
