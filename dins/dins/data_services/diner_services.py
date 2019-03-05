@@ -25,6 +25,7 @@ def request_meal(title: str, menudescription: str, available: str, user_id: int,
 
     meal.meal_avail_date = date1
     meal.diner_id = user_id
+    #REMOVED THIS FROM TABLE################################
     meal.requested_by_diner = user_id
 
     #### chef_email to chef_id conversion ####

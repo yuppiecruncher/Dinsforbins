@@ -1,5 +1,6 @@
 import datetime
 import sqlalchemy as sa
+from sqlalchemy.orm import relationship
 from dins.data.modelbase import SqlAlchemyBase
 
 
@@ -14,3 +15,4 @@ class User(SqlAlchemyBase):
 
     created_date = sa.Column(sa.DateTime, default=datetime.datetime.now)
     last_login = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
+    children = relationship("DinerPreference")
