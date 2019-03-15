@@ -18,3 +18,13 @@ def includeme(config):
     # config.add_route('chef_add', '/chef/add')
     # config.add_route('chef_diners', '/chef/diners')
     config.add_route('analyst', '/analyst')
+
+    #API controllers
+    #POST
+    config.add_route('api_diner', '/api/diner')
+    config.add_route('api_chef', '/api/chef')
+    config.add_route('api_analyst', '/api/analyst')
+    #GET
+    config.add_route('api_diner_get', '/api/diner/{uid}')
+    config.add_route('api_chef_get', '/api/chef/data')
+    config.add_route('api_analyst_get', '/api/analyst/data')

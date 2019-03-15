@@ -7,7 +7,8 @@ from dins.viewmodels.account.diner_form_viewmodel import DinerFormViewModel
 
 ################ ROLES ################
 
-@view_config(route_name='diner', renderer='dins:templates/roles/diner.pt')
+@view_config(route_name='diner',
+            renderer='dins:templates/roles/diner.pt')
 def diner_page(request):
     vm = DinerFormViewModel(request)
     return vm.to_dict()
@@ -19,7 +20,9 @@ def diner_page(request):
     if 'Analyst' in vm.user.role:
         return x.HTTPUnauthorized()
 
-@view_config(route_name='diner_request', renderer='dins:templates/roles/diner_request.pt', request_method="GET")
+@view_config(route_name='diner_request',
+            renderer='dins:templates/roles/diner_request.pt',
+            request_method="GET")
 def diner_request_get(request):
     vm = DinerFormViewModel(request)
     return vm.to_dict()
@@ -31,7 +34,9 @@ def diner_request_get(request):
     if 'Analyst' in vm.user.role:
         return x.HTTPUnauthorized()
 
-@view_config(route_name='diner_request', renderer='dins:templates/roles/diner_request.pt', request_method='POST')
+@view_config(route_name='diner_request',
+            renderer='dins:templates/roles/diner_request.pt',
+            request_method='POST')
 def diner_request_post(request):
     vm = DinerFormViewModel(request)
     vm.validate()

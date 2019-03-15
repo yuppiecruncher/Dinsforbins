@@ -2,9 +2,61 @@ from dins import DbSession
 from typing import *
 from dins.data.meals import Meal
 from dins.data.users import User
+from dins.data.diner_preferences import DinerPreference
 import datetime
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.exc import MultipleResultsFound
+
+######################## QUERY MEALS FOR USER ########################
+
+def query(uid: int):
+    session = DbSession.factory()
+    query = session.query(Meal.diner_id, Meal.meal_title, Meal.meal_description).filter(Meal.diner_id == uid)
+    dict = [u._asdict() for u in query]
+    return dict
+
+def find_chef(uid: int):
+    session = DbSession.factory()
+    query = session.query(Meal.diner_id, Meal.chef_id).filter(Meal.diner_id == uid)
+    dict = [u._asdict() for u in query]
+    return dict
+
+def diner_preferences(uid: int):
+    session = DbSession.factory()
+    query = session.query(DinerPreference.allergies, DinerPreference.dislikes, DinerPreference.diet).filter(DinerPreference.user_id == uid)
+    dict = [u._asdict() for u in query]
+    return dict
+
+
+
+
+def query_today(user_id: int):
+    day = date_today()
+    session = DbSession.factory()
+    #TODO: Implement error handling for multiple results on same day if chef makes two meals available on same day
+    row_day = session.query(Meal).filter(Meal.diner_id == user_id, Meal.meal_avail_date == day)
+    test = [r.id for r in row_day]
+    if not test:
+        return None
+    else:
+        meal_avail_date = [r.meal_avail_date for r in row_day]
+        string_date = meal_avail_date[0]
+        datelist = [string_date.strftime("%A, %B, %d")]
+        merged_list = [r.meal_title for r in row_day] + [r.meal_description for r in row_day] + datelist
+        return merged_list
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ################## ADD REQUEST TO DB #####################################################
 
